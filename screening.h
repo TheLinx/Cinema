@@ -5,4 +5,6 @@ private:
 	int ticketsSold;
 public:
 	Screening(int loc, int total, int sold);
+	void sellTickets(int amount); // can be negative (returns)
+	int ticketsAvailable();
 };
