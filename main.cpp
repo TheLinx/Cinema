@@ -15,5 +15,6 @@ int main()
 		cout << screenings[i].ticketsAvailable() << endl;
 	}
 
+	saveScreenings(&screenings);
 	return 0;
 }

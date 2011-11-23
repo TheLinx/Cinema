@@ -11,37 +11,52 @@ class OutOfBoundsException: public std::exception {
 Screening::Screening(int loc, int total, int sold)
 {
 	location = loc;
-	ticketsTotal = total;
-	ticketsSold = sold;
+	_ticketsTotal = total;
+	_ticketsSold = sold;
 }
 
 void Screening::sellTickets(int amount)
 {
 	if (amount > 0) // positive
 	{
-		if (ticketsSold + amount > ticketsTotal)
+		if (_ticketsSold + amount > _ticketsTotal)
 		{
 			throw err_OutOfBounds;
 		}
 		else
 		{
-			ticketsSold += amount;
+			_ticketsSold += amount;
 		}
 	}
 	else if (amount < 0) // negative
 	{
-		if (ticketsSold + amount < 0)
+		if (_ticketsSold + amount < 0)
 		{
 			throw err_OutOfBounds;
 		}
 		else
 		{
-			ticketsSold += amount;
+			_ticketsSold += amount;
 		}
 	}
 }
 
+int Screening::getLocation()
+{
+	return location;
+}
+
 int Screening::ticketsAvailable()
 {
-	return ticketsTotal - ticketsSold;
+	return _ticketsTotal - _ticketsSold;
+}
+
+int Screening::ticketsSold()
+{
+	return _ticketsSold;
+}
+
+int Screening::ticketsTotal()
+{
+	return _ticketsTotal;
 }

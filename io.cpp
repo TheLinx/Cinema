@@ -15,9 +15,24 @@ void loadScreenings(std::vector<Screening> *vec)
 		if (input.eof()) // we're at the end of the file, let's quit
 			break;
 	}
+
+	input.close();
 }
 
 void saveScreenings(std::vector<Screening> *vec)
 {
-	
+	std::ofstream output("biljett.txt");
+
+	for (int i = 0; i < vec->size(); i++)
+	{
+		if (i > 0)
+		{
+			output << std::endl;
+		}
+		output << vec->at(i).getLocation()
+		<< "\t" << vec->at(i).ticketsTotal()
+		<< "\t" << vec->at(i).ticketsSold();
+	}
+
+	output.close();
 }

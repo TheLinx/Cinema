@@ -4,11 +4,14 @@
 class Screening {
 private:
 	int location;
-	int ticketsTotal;
-	int ticketsSold;
+	int _ticketsTotal;
+	int _ticketsSold;
 public:
 	Screening(int loc, int total, int sold);
 	void sellTickets(int amount); // can be negative (returns)
+	int getLocation();
+	int ticketsTotal();
+	int ticketsSold();
 	int ticketsAvailable();
 };
 
