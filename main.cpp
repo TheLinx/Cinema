@@ -1,20 +1,19 @@
 #include <iostream>
+#include "io.h"
 #include "screening.h"
 using namespace std; // only in this file... so it's okay, right?
 
 int main()
 {
-	Screening *s;
-	s = new Screening(1, 10, 2);
+	vector<Screening> screenings;
+	loadScreenings(&screenings);
 
-	try {
-		s->sellTickets(9);
-	}
-	catch (exception& e) {
-		cout << "Error: " << e.what() << endl;
-	}
+	cout << "Amount of screenings: " << screenings.size() << endl;
 
-	cout << "Tickets: " << s->ticketsAvailable() << endl;
+	for (int i = 0; i < screenings.size(); i++)
+	{
+		cout << screenings[i].ticketsAvailable() << endl;
+	}
 
 	return 0;
 }
