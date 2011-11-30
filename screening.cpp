@@ -1,4 +1,5 @@
 #include <exception>
+#include <iomanip>
 #include "screening.h"
 
 class OutOfBoundsException: public std::exception {
@@ -65,6 +66,14 @@ void Screening::print(std::ostream &os) const
 {
 	os << _location << "\t" << _ticketsTotal << "\t" << _ticketsSold;
 }
+void Screening::print(std::ostream &os, bool padding) const
+{
+	if (!padding)
+		return print(os);
+	os << std::setw(9) << _location
+	   << std::setw(15) << _ticketsTotal
+	   << std::setw(14) << _ticketsSold;
+}
 
 std::ostream& operator<<(std::ostream &os, const Screening &s)
 {
@@ -74,9 +83,14 @@ std::ostream& operator<<(std::ostream &os, const Screening &s)
 
 void printAllScreenings(std::vector<Screening> *s)
 {
-	std::cout << "Screenings: " << s->size() << std::endl;
+	std::cout << "== Screenings: " << s->size() << std::endl;
+	std::cout << std::setw(9) << "Location"
+	          << std::setw(15) << "Total tickets" 
+	          << std::setw(14) << "Sold tickets"
+	<< std::endl;
 	for (int i = 0; i < s->size(); i++)
 	{
-		std::cout << s->at(i) << std::endl;
+		s->at(i).print(std::cout, true);
+		std::cout << std::endl;
 	}
 }

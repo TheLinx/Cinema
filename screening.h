@@ -16,6 +16,7 @@ public:
 	int ticketsSold() const;
 	int ticketsAvailable() const;
 	void print(std::ostream &os) const;
+	void print(std::ostream &os, bool pad) const;
 	friend std::ostream &operator<<(std::ostream &os, const Screening &s);
 };
 
