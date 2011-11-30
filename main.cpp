@@ -8,12 +8,7 @@ int main()
 	vector<Screening> screenings;
 	loadScreenings(&screenings);
 
-	cout << "Screenings: " << screenings.size() << endl;
-
-	for (int i = 0; i < screenings.size(); i++)
-	{
-		cout << screenings[i] << endl;
-	}
+	printAllScreenings(&screenings);
 
 	saveScreenings(&screenings);
 	return 0;

@@ -1,7 +1,7 @@
-#include <iostream>
-
 #ifndef SCREENING_H
 #define SCREENING_H
+#include <iostream>
+#include <vector>
 
 class Screening {
 private:
@@ -18,5 +18,7 @@ public:
 	void print(std::ostream &os) const;
 	friend std::ostream &operator<<(std::ostream &os, const Screening &s);
 };
+
+void printAllScreenings(std::vector<Screening> *s);
 
 #endif

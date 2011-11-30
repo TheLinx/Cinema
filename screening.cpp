@@ -71,3 +71,12 @@ std::ostream& operator<<(std::ostream &os, const Screening &s)
 	s.print(os);
 	return os;
 }
+
+void printAllScreenings(std::vector<Screening> *s)
+{
+	std::cout << "Screenings: " << s->size() << std::endl;
+	for (int i = 0; i < s->size(); i++)
+	{
+		std::cout << s->at(i) << std::endl;
+	}
+}
