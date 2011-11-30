@@ -8,11 +8,11 @@ int main()
 	vector<Screening> screenings;
 	loadScreenings(&screenings);
 
-	cout << "Amount of screenings: " << screenings.size() << endl;
+	cout << "Screenings: " << screenings.size() << endl;
 
 	for (int i = 0; i < screenings.size(); i++)
 	{
-		cout << screenings[i].ticketsAvailable() << endl;
+		cout << screenings[i] << endl;
 	}
 
 	saveScreenings(&screenings);

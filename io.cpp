@@ -29,9 +29,7 @@ void saveScreenings(std::vector<Screening> *vec)
 		{
 			output << std::endl;
 		}
-		output << vec->at(i).getLocation()
-		<< "\t" << vec->at(i).ticketsTotal()
-		<< "\t" << vec->at(i).ticketsSold();
+		output << vec->at(i);
 	}
 
 	output.close();

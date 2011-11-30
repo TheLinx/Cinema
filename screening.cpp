@@ -10,7 +10,7 @@ class OutOfBoundsException: public std::exception {
 
 Screening::Screening(int loc, int total, int sold)
 {
-	location = loc;
+	_location = loc;
 	_ticketsTotal = total;
 	_ticketsSold = sold;
 }
@@ -41,22 +41,33 @@ void Screening::sellTickets(int amount)
 	}
 }
 
-int Screening::getLocation()
+int Screening::getLocation() const
 {
-	return location;
+	return _location;
 }
 
-int Screening::ticketsAvailable()
+int Screening::ticketsAvailable() const
 {
 	return _ticketsTotal - _ticketsSold;
 }
 
-int Screening::ticketsSold()
+int Screening::ticketsSold() const
 {
 	return _ticketsSold;
 }
 
-int Screening::ticketsTotal()
+int Screening::ticketsTotal() const
 {
 	return _ticketsTotal;
+}
+
+void Screening::print(std::ostream &os) const
+{
+	os << _location << "\t" << _ticketsTotal << "\t" << _ticketsSold;
+}
+
+std::ostream& operator<<(std::ostream &os, const Screening &s)
+{
+	s.print(os);
+	return os;
 }
