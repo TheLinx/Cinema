@@ -113,6 +113,12 @@ void printAllScreenings(std::vector<Screening> *s)
 
 Screening *getScreening(std::vector<Screening> *s, int location)
 {
+	int asd;
+	return getScreening(s, location, &asd);
+}
+
+Screening *getScreening(std::vector<Screening> *s, int location, int *id)
+{
 	int found = -1;
 	for (int i = 0; i < s->size(); i++)
 	{
@@ -126,5 +132,6 @@ Screening *getScreening(std::vector<Screening> *s, int location)
 	{
 		throw err_NoSuchValue;
 	}
+	*id = found;
 	return &s->at(found);
 }

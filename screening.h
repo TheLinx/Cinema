@@ -25,5 +25,6 @@ public:
 
 void printAllScreenings(std::vector<Screening> *s);
 Screening *getScreening(std::vector<Screening> *s, int location);
+Screening *getScreening(std::vector<Screening> *s, int location, int *id);
 
 #endif
