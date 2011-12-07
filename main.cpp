@@ -7,6 +7,7 @@ int main()
 {
 	char cmd;
 	bool run = true;
+	int loc, amount;
 	vector<Screening> screenings;
 	loadScreenings(&screenings);
 
@@ -14,25 +15,41 @@ int main()
 	{
 		printAllScreenings(&screenings);
 		cout << "== What do you want to do?" << endl;
-		cout << " a) Buy a ticket" << endl;
+		cout << " a) Buy tickets" << endl;
+		cout << " b) Return tickets" << endl;
 		cout << " q) Quit" << endl;
 		cout << "> ";
 		cin >> cmd;
 		switch(cmd)
 		{
 		case 'a':
-			int loc, amount;
 			cout << "== Which screening? (Location?)" << endl << "> ";
 			cin >> loc;
 			cout << "== How many tickets?" << endl << "> ";
 			cin >> amount;
 			try {
 				Screening *target = getScreening(&screenings, loc);
-				cout << "== Reserving " << amount << " tickets for screening " << target << "." << endl;
+				cout << "== Reserving " << amount << " tickets for screening " << target->getLocation() << "." << endl;
 				target->sellTickets(amount);
 			}
 			catch (exception &e) {
-				cout << "Error: " << e.what() << endl;
+				cout << "Error: " << e.what() <<
+				endl << "No change has been made." << endl;
+			}
+			break;
+		case 'b':
+			cout << "== Which screening? (Location?)" << endl << "> ";
+			cin >> loc;
+			cout << "== How many tickets?" << endl << "> ";
+			cin >> amount;
+			try {
+				Screening *target = getScreening(&screenings, loc);
+				cout << "== Returning " << amount << " tickets for screening " << target->getLocation() << "." << endl;
+				target->sellTickets(-amount);
+			}
+			catch (exception &e) {
+				cout << "Error: " << e.what() <<
+				endl << "No change has been made." << endl;
 			}
 			break;
 		case 'q':
