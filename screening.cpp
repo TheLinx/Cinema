@@ -15,9 +15,10 @@ class ValueNotFoundException: public std::exception {
 	}
 } err_NoSuchValue;
 
-Screening::Screening(int loc, int total, int sold)
+Screening::Screening(int loc, std::string name, int total, int sold)
 {
 	_location = loc;
+	_movieName = name;
 	_ticketsTotal = total;
 	_ticketsSold = sold;
 }
@@ -50,35 +51,41 @@ void Screening::sellTickets(int amount)
 	}
 }
 
-int Screening::getLocation()
+int Screening::getLocation() const
 {
 	return _location;
 }
 
-int Screening::ticketsAvailable()
+int Screening::ticketsAvailable() const
 {
 	return _ticketsTotal - _ticketsSold;
 }
 
-int Screening::ticketsSold()
+int Screening::ticketsSold() const
 {
 	return _ticketsSold;
 }
 
-int Screening::ticketsTotal()
+int Screening::ticketsTotal() const
 {
 	return _ticketsTotal;
 }
 
+std::string Screening::movieName() const
+{
+	return _movieName;
+}
+
 void Screening::print(std::ostream &os) const
 {
-	os << _location << "\t" << _ticketsTotal << "\t" << _ticketsSold;
+	os << _location << "\t" << _movieName << "\t" << _ticketsTotal << "\t" << _ticketsSold;
 }
 void Screening::print(std::ostream &os, bool padding) const
 {
 	if (!padding)
 		return print(os);
 	os << std::setw(9) << _location
+	   << std::setw(20) << _movieName
 	   << std::setw(15) << _ticketsTotal
 	   << std::setw(14) << _ticketsSold;
 }
@@ -93,6 +100,7 @@ void printAllScreenings(std::vector<Screening> *s)
 {
 	std::cout << "== Screenings: " << s->size() << std::endl;
 	std::cout << std::setw(9) << "Location"
+	          << std::setw(20) << "Movie name"
 	          << std::setw(15) << "Total tickets" 
 	          << std::setw(14) << "Sold tickets"
 	<< std::endl;

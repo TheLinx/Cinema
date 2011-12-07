@@ -1,11 +1,13 @@
 #include <exception>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "io.h"
 
 void loadScreenings(std::vector<Screening> *vec)
 {
 	int tmpLoc, tmpTot, tmpSold, counter = 1;
+	std::string tmpName;
 	std::ifstream input("biljett.txt");
 
 	if (!input) // if the file doesn't exist...
@@ -13,13 +15,12 @@ void loadScreenings(std::vector<Screening> *vec)
 	input.seekg(0, std::ios::end);
 	if (input.tellg() <= 1) // if the file is empty...
 		return; // don't fuck up!
-	std::cout << "file length is " << input.tellg() << std::endl;
 	input.seekg(0, std::ios::beg);
 	
 	while (true)
 	{
-		input >> tmpLoc >> tmpTot >> tmpSold;
-		vec->push_back(Screening(tmpLoc, tmpTot, tmpSold));
+		input >> tmpLoc >> tmpName >> tmpTot >> tmpSold;
+		vec->push_back(Screening(tmpLoc, tmpName, tmpTot, tmpSold));
 		if (input.eof()) // we're at the end of the file, let's quit
 			break;
 	}
