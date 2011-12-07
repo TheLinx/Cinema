@@ -8,6 +8,12 @@ class OutOfBoundsException: public std::exception {
 		return "Value out of bounds.";
 	}
 } err_OutOfBounds;
+class ValueNotFoundException: public std::exception {
+	virtual const char* what() const throw()
+	{
+		return "No such value.";
+	}
+} err_NoSuchValue;
 
 Screening::Screening(int loc, int total, int sold)
 {
@@ -26,7 +32,9 @@ void Screening::sellTickets(int amount)
 		}
 		else
 		{
+			std::cout << amount << ", " << _ticketsSold << std::endl;
 			_ticketsSold += amount;
+			std::cout << amount << ", " << _ticketsSold << std::endl;
 		}
 	}
 	else if (amount < 0) // negative
@@ -42,22 +50,22 @@ void Screening::sellTickets(int amount)
 	}
 }
 
-int Screening::getLocation() const
+int Screening::getLocation()
 {
 	return _location;
 }
 
-int Screening::ticketsAvailable() const
+int Screening::ticketsAvailable()
 {
 	return _ticketsTotal - _ticketsSold;
 }
 
-int Screening::ticketsSold() const
+int Screening::ticketsSold()
 {
 	return _ticketsSold;
 }
 
-int Screening::ticketsTotal() const
+int Screening::ticketsTotal()
 {
 	return _ticketsTotal;
 }
@@ -93,4 +101,22 @@ void printAllScreenings(std::vector<Screening> *s)
 		s->at(i).print(std::cout, true);
 		std::cout << std::endl;
 	}
+}
+
+Screening *getScreening(std::vector<Screening> *s, int location)
+{
+	int found = -1;
+	for (int i = 0; i < s->size(); i++)
+	{
+		if (s->at(i).getLocation() == location)
+		{
+			found = i;
+			break;
+		}
+	}
+	if (found == -1)
+	{
+		throw err_NoSuchValue;
+	}
+	return &s->at(found);
 }
