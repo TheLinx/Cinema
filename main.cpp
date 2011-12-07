@@ -29,7 +29,7 @@ int main()
 			cin >> amount;
 			try {
 				Screening *target = getScreening(&screenings, loc);
-				cout << "== Reserving " << amount << " tickets for screening " << target->getLocation() << "." << endl;
+				cout << "== Reserving " << amount << " tickets for screening of " << target->movieName() << "." << endl;
 				target->sellTickets(amount);
 			}
 			catch (exception &e) {
@@ -44,7 +44,7 @@ int main()
 			cin >> amount;
 			try {
 				Screening *target = getScreening(&screenings, loc);
-				cout << "== Returning " << amount << " tickets for screening " << target->getLocation() << "." << endl;
+				cout << "== Returning " << amount << " tickets for screening of " << target->movieName() << "." << endl;
 				target->sellTickets(-amount);
 			}
 			catch (exception &e) {
