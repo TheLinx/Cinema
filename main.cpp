@@ -5,7 +5,6 @@ using namespace std; // only in this file... so it's okay, right?
 
 int main()
 {
-	char cmd;
 	bool run = true;
 	vector<Screening> screenings;
 	loadScreenings(&screenings);
@@ -14,31 +13,7 @@ int main()
 	{
 		printAllScreenings(&screenings);
 		cout << "== What do you want to do?" << endl;
-		cout << " a) Buy a ticket" << endl;
-		cout << " q) Quit" << endl;
-		cout << "> ";
-		cin >> cmd;
-		switch(cmd)
-		{
-		case 'a':
-			int loc, amount;
-			cout << "== Which screening? (Location?)" << endl << "> ";
-			cin >> loc;
-			cout << "== How many tickets?" << endl << "> ";
-			cin >> amount;
-			try {
-				Screening *target = getScreening(&screenings, loc);
-				cout << "== Reserving " << amount << " tickets for screening " << target << "." << endl;
-				target->sellTickets(amount);
-			}
-			catch (exception &e) {
-				cout << "Error: " << e.what() << endl;
-			}
-			break;
-		case 'q':
-			run = false;
-			break;
-		}
+		run = false;
 	}
 
 	saveScreenings(&screenings);

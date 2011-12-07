@@ -11,16 +11,15 @@ private:
 public:
 	Screening(int loc, int total, int sold);
 	void sellTickets(int amount); // can be negative (returns)
-	int getLocation();
-	int ticketsTotal();
-	int ticketsSold();
-	int ticketsAvailable();
+	int getLocation() const;
+	int ticketsTotal() const;
+	int ticketsSold() const;
+	int ticketsAvailable() const;
 	void print(std::ostream &os) const;
 	void print(std::ostream &os, bool pad) const;
 	friend std::ostream &operator<<(std::ostream &os, const Screening &s);
 };
 
 void printAllScreenings(std::vector<Screening> *s);
-Screening *getScreening(std::vector<Screening> *s, int location);
 
 #endif
