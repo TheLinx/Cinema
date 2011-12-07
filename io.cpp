@@ -8,6 +8,14 @@ void loadScreenings(std::vector<Screening> *vec)
 	int tmpLoc, tmpTot, tmpSold, counter = 1;
 	std::ifstream input("biljett.txt");
 
+	if (!input) // if the file doesn't exist...
+		return; // don't fuck up!
+	input.seekg(0, std::ios::end);
+	if (input.tellg() <= 1) // if the file is empty...
+		return; // don't fuck up!
+	std::cout << "file length is " << input.tellg() << std::endl;
+	input.seekg(0, std::ios::beg);
+	
 	while (true)
 	{
 		input >> tmpLoc >> tmpTot >> tmpSold;
