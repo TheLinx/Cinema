@@ -15,6 +15,7 @@ private:
 public:
 	Order(std::string name, int screening_id, int tickets);
 	Order(std::string name, int screening_id, int tickets, int id);
+	void returnTickets();
 	int getId() const;
 	void print(std::ostream &os) const;
 	void print(std::ostream &os, bool pad) const;

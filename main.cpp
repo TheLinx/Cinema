@@ -24,7 +24,8 @@ int main()
 		cout << " c) Add a screening" << endl;
 		cout << " d) Remove a screening" << endl;
 		cout << " e) Add an order" << endl;
-		cout << " f) Remove an order" << endl;
+		cout << " f) Cancel an order" << endl;
+		cout << " g) Remove an order" << endl;
 		cout << " q) Quit" << endl;
 		cout << "> ";
 		cin >> cmd;
@@ -122,8 +123,24 @@ int main()
 			cout << "== Which order? (Id?)" << endl << "> ";
 			cin >> id;
 			try {
-				getOrder(id); // check that it exists before we remove it
+				Order *order = getOrder(id); // check that it exists before we remove it
 				cout << "== Removing order with id " << id << "." << endl;
+				order->returnTickets();
+				orders.erase(orders.begin() + id);
+			}
+			catch (exception &e) {
+				cout << "Error: " << e.what() <<
+				endl << "No change has been made." << endl;
+			}
+			}
+			break;
+		case 'g':
+			{ int id;
+			cout << "== Which order? (Id?)" << endl << "> ";
+			cin >> id;
+			try {
+				getOrder(id); // check that it exists before we remove it
+				cout << "== Completing order with id " << id << "." << endl;
 				orders.erase(orders.begin() + id);
 			}
 			catch (exception &e) {
