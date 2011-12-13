@@ -7,12 +7,15 @@ class OutOfBoundsException: public std::exception {
 	{
 		return "Value out of bounds.";
 	}
-} err_OutOfBounds;
+};
 class ValueNotFoundException: public std::exception {
 	virtual const char* what() const throw()
 	{
 		return "No such value.";
 	}
-} err_NoSuchValue;
+};
+
+extern OutOfBoundsException err_OutOfBounds;
+extern ValueNotFoundException err_NoSuchValue;
 
 #endif
