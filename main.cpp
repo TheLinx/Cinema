@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "io.h"
 #include "screening.h"
+#include "order.h"
 using namespace std; // only in this file... so it's okay, right?
 
 int main()
@@ -11,15 +12,19 @@ int main()
 	bool run = true;
 	srand((unsigned)time(NULL));
 	loadScreenings();
+	loadOrders();
 
 	while(run)
 	{
 		printAllScreenings();
+		printAllOrders();
 		cout << "== What do you want to do?" << endl;
 		cout << " a) Buy tickets" << endl;
 		cout << " b) Return tickets" << endl;
 		cout << " c) Add a screening" << endl;
 		cout << " d) Remove a screening" << endl;
+		cout << " e) Add an order" << endl;
+		cout << " f) Remove an order" << endl;
 		cout << " q) Quit" << endl;
 		cout << "> ";
 		cin >> cmd;
@@ -92,6 +97,41 @@ int main()
 			}
 			}
 			break;
+		case 'e':
+			{ int loc, amount; string name;
+			cout << "== Which screening? (Location?)" << endl << "> ";
+			cin >> loc;
+			cout << "== How many tickets?" << endl << "> ";
+			cin >> amount;
+			cout << "== Under what name?" << endl << "> ";
+			cin >> name;
+			try {
+				int target_id;
+				Screening *target = getScreening(loc, &target_id);
+				cout << "== Booking " << amount << " tickets for screening of " << target->movieName() << " for " << name << "." << endl;
+				orders.push_back(Order(name, target_id, amount));
+			}
+			catch (exception &e) {
+				cout << "Error: " << e.what() <<
+				endl << "No change has been made." << endl;
+			}
+			}
+			break;
+		case 'f':
+			{ int id;
+			cout << "== Which order? (Id?)" << endl << "> ";
+			cin >> id;
+			try {
+				getOrder(id); // check that it exists before we remove it
+				cout << "== Removing order with id " << id << "." << endl;
+				orders.erase(orders.begin() + id);
+			}
+			catch (exception &e) {
+				cout << "Error: " << e.what() <<
+				endl << "No change has been made." << endl;
+			}
+			}
+			break;
 		case 'q':
 			run = false;
 			break;
@@ -99,5 +139,6 @@ int main()
 	}
 
 	saveScreenings();
+	saveOrders();
 	return 0;
 }

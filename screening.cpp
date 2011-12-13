@@ -93,7 +93,7 @@ void printAllScreenings()
 	          << std::setw(15) << "Total tickets" 
 	          << std::setw(14) << "Sold tickets"
 	<< std::endl;
-	for (int i = 0; i < screenings.size(); i++)
+	for (unsigned i = 0; i < screenings.size(); i++)
 	{
 		screenings.at(i).print(std::cout, true);
 		std::cout << std::endl;
@@ -109,7 +109,7 @@ Screening *getScreening(int location)
 Screening *getScreening(int location, int *id)
 {
 	int found = -1;
-	for (int i = 0; i < screenings.size(); i++)
+	for (unsigned i = 0; i < screenings.size(); i++)
 	{
 		if (screenings.at(i).getLocation() == location)
 		{
