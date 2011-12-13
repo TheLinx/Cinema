@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include "io.h"
 #include "screening.h"
 using namespace std; // only in this file... so it's okay, right?
@@ -7,6 +9,7 @@ int main()
 {
 	char cmd;
 	bool run = true;
+	srand((unsigned)time(NULL));
 	loadScreenings();
 
 	while(run)
