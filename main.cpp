@@ -7,8 +7,6 @@ int main()
 {
 	char cmd;
 	bool run = true;
-	int loc, amount;
-	string name;
 	loadScreenings();
 
 	while(run)
@@ -25,6 +23,7 @@ int main()
 		switch(cmd)
 		{
 		case 'a':
+			{ int loc, amount;
 			cout << "== Which screening? (Location?)" << endl << "> ";
 			cin >> loc;
 			cout << "== How many tickets?" << endl << "> ";
@@ -38,8 +37,10 @@ int main()
 				cout << "Error: " << e.what() <<
 				endl << "No change has been made." << endl;
 			}
+			}
 			break;
 		case 'b':
+			{ int loc, amount;
 			cout << "== Which screening? (Location?)" << endl << "> ";
 			cin >> loc;
 			cout << "== How many tickets?" << endl << "> ";
@@ -53,8 +54,10 @@ int main()
 				cout << "Error: " << e.what() <<
 				endl << "No change has been made." << endl;
 			}
+			}
 			break;
 		case 'c':
+			{ int loc, amount; string name;
 			cout << "== Location?" << endl << "> ";
 			cin >> loc;
 			cout << "== Movie name?" << endl << "> ";
@@ -68,8 +71,10 @@ int main()
 				cout << "Error: " << e.what() <<
 				endl << "No change has been made." << endl;
 			}
+			}
 			break;
 		case 'd':
+			{ int loc;
 			cout << "== Which screening? (Location?)" << endl << "> ";
 			cin >> loc;
 			try {
@@ -81,6 +86,7 @@ int main()
 			catch (exception &e) {
 				cout << "Error: " << e.what() <<
 				endl << "No change has been made." << endl;
+			}
 			}
 			break;
 		case 'q':
