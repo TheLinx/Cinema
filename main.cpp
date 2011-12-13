@@ -1,6 +1,6 @@
 #include <iostream>
-#include "screening.h"
 #include "io.h"
+#include "screening.h"
 using namespace std; // only in this file... so it's okay, right?
 
 int main()
