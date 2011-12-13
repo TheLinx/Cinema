@@ -23,8 +23,10 @@ public:
 	friend std::ostream &operator<<(std::ostream &os, const Screening &s);
 };
 
-void printAllScreenings(std::vector<Screening> *s);
-Screening *getScreening(std::vector<Screening> *s, int location);
-Screening *getScreening(std::vector<Screening> *s, int location, int *id);
+extern std::vector<Screening> screenings;
+
+void printAllScreenings();
+Screening *getScreening(int location);
+Screening *getScreening(int location, int *id);
 
 #endif

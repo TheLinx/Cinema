@@ -2,6 +2,8 @@
 #include <iomanip>
 #include "screening.h"
 
+std::vector<Screening> screenings;
+
 class OutOfBoundsException: public std::exception {
 	virtual const char* what() const throw()
 	{
@@ -96,33 +98,33 @@ std::ostream& operator<<(std::ostream &os, const Screening &s)
 	return os;
 }
 
-void printAllScreenings(std::vector<Screening> *s)
+void printAllScreenings()
 {
-	std::cout << "== Screenings: " << s->size() << std::endl;
+	std::cout << "== Screenings: " << screenings.size() << std::endl;
 	std::cout << std::setw(9) << "Location"
 	          << std::setw(20) << "Movie name"
 	          << std::setw(15) << "Total tickets" 
 	          << std::setw(14) << "Sold tickets"
 	<< std::endl;
-	for (int i = 0; i < s->size(); i++)
+	for (int i = 0; i < screenings.size(); i++)
 	{
-		s->at(i).print(std::cout, true);
+		screenings.at(i).print(std::cout, true);
 		std::cout << std::endl;
 	}
 }
 
-Screening *getScreening(std::vector<Screening> *s, int location)
+Screening *getScreening(int location)
 {
 	int asd;
-	return getScreening(s, location, &asd);
+	return getScreening(location, &asd);
 }
 
-Screening *getScreening(std::vector<Screening> *s, int location, int *id)
+Screening *getScreening(int location, int *id)
 {
 	int found = -1;
-	for (int i = 0; i < s->size(); i++)
+	for (int i = 0; i < screenings.size(); i++)
 	{
-		if (s->at(i).getLocation() == location)
+		if (screenings.at(i).getLocation() == location)
 		{
 			found = i;
 			break;
@@ -133,5 +135,5 @@ Screening *getScreening(std::vector<Screening> *s, int location, int *id)
 		throw err_NoSuchValue;
 	}
 	*id = found;
-	return &s->at(found);
+	return &screenings.at(found);
 }

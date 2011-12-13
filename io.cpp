@@ -4,7 +4,7 @@
 #include <string>
 #include "io.h"
 
-void loadScreenings(std::vector<Screening> *vec)
+void loadScreenings()
 {
 	int tmpLoc, tmpTot, tmpSold, counter = 1;
 	std::string tmpName;
@@ -20,7 +20,7 @@ void loadScreenings(std::vector<Screening> *vec)
 	while (true)
 	{
 		input >> tmpLoc >> tmpName >> tmpTot >> tmpSold;
-		vec->push_back(Screening(tmpLoc, tmpName, tmpTot, tmpSold));
+		screenings.push_back(Screening(tmpLoc, tmpName, tmpTot, tmpSold));
 		if (input.eof()) // we're at the end of the file, let's quit
 			break;
 	}
@@ -28,17 +28,17 @@ void loadScreenings(std::vector<Screening> *vec)
 	input.close();
 }
 
-void saveScreenings(std::vector<Screening> *vec)
+void saveScreenings()
 {
 	std::ofstream output("biljett.txt");
 
-	for (int i = 0; i < vec->size(); i++)
+	for (int i = 0; i < screenings.size(); i++)
 	{
 		if (i > 0)
 		{
 			output << std::endl;
 		}
-		output << vec->at(i);
+		output << screenings.at(i);
 	}
 
 	output.close();

@@ -3,7 +3,7 @@
 #include <vector>
 #include "screening.h"
 
-void loadScreenings(std::vector<Screening> *vec);
-void saveScreenings(std::vector<Screening> *vec);
+void loadScreenings();
+void saveScreenings();
 
 #endif

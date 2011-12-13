@@ -1,6 +1,6 @@
 #include <iostream>
-#include "io.h"
 #include "screening.h"
+#include "io.h"
 using namespace std; // only in this file... so it's okay, right?
 
 int main()
@@ -9,12 +9,11 @@ int main()
 	bool run = true;
 	int loc, amount;
 	string name;
-	vector<Screening> screenings;
-	loadScreenings(&screenings);
+	loadScreenings();
 
 	while(run)
 	{
-		printAllScreenings(&screenings);
+		printAllScreenings();
 		cout << "== What do you want to do?" << endl;
 		cout << " a) Buy tickets" << endl;
 		cout << " b) Return tickets" << endl;
@@ -31,7 +30,7 @@ int main()
 			cout << "== How many tickets?" << endl << "> ";
 			cin >> amount;
 			try {
-				Screening *target = getScreening(&screenings, loc);
+				Screening *target = getScreening(loc);
 				cout << "== Reserving " << amount << " tickets for screening of " << target->movieName() << "." << endl;
 				target->sellTickets(amount);
 			}
@@ -46,7 +45,7 @@ int main()
 			cout << "== How many tickets?" << endl << "> ";
 			cin >> amount;
 			try {
-				Screening *target = getScreening(&screenings, loc);
+				Screening *target = getScreening(loc);
 				cout << "== Returning " << amount << " tickets for screening of " << target->movieName() << "." << endl;
 				target->sellTickets(-amount);
 			}
@@ -75,7 +74,7 @@ int main()
 			cin >> loc;
 			try {
 				int target_id;
-				Screening *target = getScreening(&screenings, loc, &target_id);
+				Screening *target = getScreening(loc, &target_id);
 				cout << "== Removing screening of " << target->movieName() << "." << endl;
 				screenings.erase(screenings.begin() + target_id);
 			}
@@ -90,6 +89,6 @@ int main()
 		}
 	}
 
-	saveScreenings(&screenings);
+	saveScreenings();
 	return 0;
 }
