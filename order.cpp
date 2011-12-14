@@ -20,9 +20,7 @@ Order::Order(std::string name_in, int screening_id_in, int tickets_in)
 	}
 	screening_id = screening_id_in;
 	screening = &screenings.at(screening_id);
-	screening->print(std::cout);
 	tickets = tickets_in;
-	std::cout << std::endl << tickets << std::endl;
 	screening->sellTickets(tickets); // reserve the tickets
 }
 Order::Order(std::string name_in, int screening_id_in, int tickets_in, int id_in) // if we already have an id (loading)

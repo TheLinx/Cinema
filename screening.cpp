@@ -22,9 +22,7 @@ void Screening::sellTickets(int amount)
 		}
 		else
 		{
-			std::cout << amount << ", " << _ticketsSold << std::endl;
 			_ticketsSold += amount;
-			std::cout << amount << ", " << _ticketsSold << std::endl;
 		}
 	}
 	else if (amount < 0) // negative
