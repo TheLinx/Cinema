@@ -6,6 +6,13 @@ std::vector<Screening> screenings;
 
 Screening::Screening(int loc, std::string name, int total, int sold)
 {
+	// check that the location isn't occupied, and throw a tantrum if it is
+	try {
+		getScreening(loc); // get a screening in this location
+	}
+	else { // we didn't suffer from an exception. this is actually bad.
+		throw err_KeyOccupied;
+	}
 	_location = loc;
 	_movieName = name;
 	_ticketsTotal = total;
@@ -16,27 +23,29 @@ void Screening::sellTickets(int amount)
 {
 	if (amount > 0) // positive
 	{
-		if (_ticketsSold + amount > _ticketsTotal)
+		if (_ticketsSold + amount > _ticketsTotal) // if we actually can't sell that many tickets
 		{
-			throw err_OutOfBounds;
+			throw err_OutOfBounds; // throw an exception
 		}
-		else
+		else // everything checks out
 		{
-			_ticketsSold += amount;
+			_ticketsSold += amount; // modify our private member
 		}
 	}
 	else if (amount < 0) // negative
 	{
-		if (_ticketsSold + amount < 0)
+		if (_ticketsSold + amount < 0) // again, if we can't return that many tickets
 		{
-			throw err_OutOfBounds;
+			throw err_OutOfBounds; // throw an exception
 		}
-		else
+		else // everything checks out
 		{
-			_ticketsSold += amount;
+			_ticketsSold += amount; // modify our private member
 		}
 	}
 }
+
+// accessor functions -- comments not needed
 
 int Screening::getLocation() const
 {
@@ -63,12 +72,13 @@ std::string Screening::movieName() const
 	return _movieName;
 }
 
+// all the printing stuff
 void Screening::print(std::ostream &os) const
-{
+{ // this is the function for printing to the save file
 	os << _location << "\t" << _movieName << "\t" << _ticketsTotal << "\t" << _ticketsSold;
 }
 void Screening::print(std::ostream &os, bool padding) const
-{
+{ // this is the function for printing to the humans -- padding and pretty stuff
 	if (!padding)
 		return print(os);
 	os << std::setw(9) << _location
@@ -78,11 +88,12 @@ void Screening::print(std::ostream &os, bool padding) const
 }
 
 std::ostream& operator<<(std::ostream &os, const Screening &s)
-{
+{ // cout << thing handler
 	s.print(os);
 	return os;
 }
 
+// print a pretty list of the screenings vector
 void printAllScreenings()
 {
 	std::cout << "== Screenings: " << screenings.size() << std::endl;
@@ -92,33 +103,36 @@ void printAllScreenings()
 	          << std::setw(14) << "Sold tickets"
 	<< std::endl;
 	for (unsigned i = 0; i < screenings.size(); i++)
-	{
-		screenings.at(i).print(std::cout, true);
+	{ // for evert screening in the screenings vector
+		screenings.at(i).print(std::cout, true); // call the pretty print function
 		std::cout << std::endl;
 	}
 }
 
-Screening *getScreening(int location)
-{
-	int asd;
-	return getScreening(location, &asd);
-}
-
+// go through the screenings vector to find the screening in a specified location.
+// also pass the vector id of it as a reference upstream
 Screening *getScreening(int location, int *id)
 {
-	int found = -1;
+	int found = -1; // vector can't have an item here -- safe for instances where there is no screening at specified location
 	for (unsigned i = 0; i < screenings.size(); i++)
-	{
-		if (screenings.at(i).getLocation() == location)
+	{ // loop through the screenings vector
+		if (screenings.at(i).getLocation() == location) // stuff checks out!
 		{
 			found = i;
-			break;
+			break; // no need to continue the loop - let's quit out
 		}
 	}
-	if (found == -1)
+	if (found == -1) // if the found variable hasn't changed
 	{
-		throw err_NoSuchValue;
+		throw err_NoSuchValue; // it's exception o'clock
 	}
-	*id = found;
-	return &screenings.at(found);
+	*id = found; // pass id of screening upstream
+	return &screenings.at(found); // and return a reference
+}
+
+// if we don't actually need the vector id
+Screening *getScreening(int location)
+{
+	int asd; // there's probably a way to do this without even creating a temp variable, but this is probably
+	return getScreening(location, &asd); // optimized out by the compiler anyway
 }

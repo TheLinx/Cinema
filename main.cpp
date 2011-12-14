@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <cstdio>
 #include "io.h"
 #include "screening.h"
 #include "order.h"
@@ -8,16 +9,20 @@ using namespace std; // only in this file... so it's okay, right?
 
 int main()
 {
-	char cmd;
-	bool run = true;
-	srand((unsigned)time(NULL));
+	// variables we use in the entire main function
+	char cmd; // we use this in the menu
+	bool run = true; // the flag to keep running -- we can't use break to get out of the loop while in a switch-case clause
+	srand((unsigned)time(NULL)); rand(); rand(); // seed the random generator so we get somewhat random numbers
+	// load saved data
 	loadScreenings();
 	loadOrders();
 
 	while(run)
 	{
+		// show the current state of information
 		printAllScreenings();
 		printAllOrders();
+		// show the user's options
 		cout << "== What do you want to do?" << endl;
 		cout << " a) Buy tickets" << endl;
 		cout << " b) Return tickets" << endl;
@@ -28,9 +33,23 @@ int main()
 		cout << " g) Remove an order" << endl;
 		cout << " q) Quit" << endl;
 		cout << "> ";
+		fflush(stdin); // just in case something is in the input buffer
 		cin >> cmd;
 		switch(cmd)
 		{
+		/*
+		case 'option':
+			{ variables we use in this function;
+			read information
+			try {
+				do the information modification
+			}
+			catch (exception &e) {
+				something went wrong, tell the user
+			}
+			}
+			break;
+		*/
 		case 'a':
 			{ int loc, amount;
 			cout << "== Which screening? (Location?)" << endl << "> ";
@@ -150,11 +169,13 @@ int main()
 			}
 			break;
 		case 'q':
+			// flip the flag
 			run = false;
 			break;
 		}
 	}
 
+	// time to say goodbye
 	saveScreenings();
 	saveOrders();
 	return 0;

@@ -10,7 +10,7 @@ Order::Order(std::string name_in, int screening_id_in, int tickets_in)
 	name = name_in;
 	while (true)
 	{
-		id = rand();
+		id = rand(); // a random id. this will be a big number on Linux. not a problem, just annoying.
 		try {
 			getOrder(id); // is there an order with this id?
 		}
@@ -19,7 +19,7 @@ Order::Order(std::string name_in, int screening_id_in, int tickets_in)
 		}
 	}
 	screening_id = screening_id_in;
-	screening = &screenings.at(screening_id);
+	screening = &screenings.at(screening_id); // get the Screening reference directly from the vector
 	tickets = tickets_in;
 	screening->sellTickets(tickets); // reserve the tickets
 }
@@ -30,11 +30,8 @@ Order::Order(std::string name_in, int screening_id_in, int tickets_in, int id_in
 	screening = &screenings.at(screening_id);
 	tickets = tickets_in;
 	id = id_in;
-}
-
-void Order::returnTickets()
-{
-	screening->sellTickets(-tickets);
+	// there's no exception here because unless the saved data is wrong (and it shouldn't be unless the user is stupid)
+	// then ID won't be occupied.
 }
 
 int Order::getId() const
@@ -42,6 +39,12 @@ int Order::getId() const
 	return id;
 }
 
+void Order::returnTickets()
+{
+	screening->sellTickets(-tickets); // nothing weird here
+}
+
+// the rest is pretty much identical to screening.cpp, look in that for comments.
 void Order::print(std::ostream &os) const
 {
 	os << id << "\t" << name << "\t" << screening_id << "\t" << tickets;
