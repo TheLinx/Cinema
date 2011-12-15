@@ -1,7 +1,6 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-#include <cstdio>
 #include "io.h"
 #include "screening.h"
 #include "order.h"
@@ -33,7 +32,6 @@ int main()
 		cout << " g) Remove an order" << endl;
 		cout << " q) Quit" << endl;
 		cout << "> ";
-		fflush(stdin); // just in case something is in the input buffer
 		cin >> cmd;
 		switch(cmd)
 		{
