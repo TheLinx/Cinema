@@ -22,6 +22,7 @@ Order::Order(std::string name_in, int screening_id_in, int tickets_in)
 	screening = &screenings.at(screening_id); // get the Screening reference directly from the vector
 	tickets = tickets_in;
 	screening->sellTickets(tickets); // reserve the tickets
+	orders.push_back(*this);
 }
 Order::Order(std::string name_in, int screening_id_in, int tickets_in, int id_in) // if we already have an id (loading)
 {
@@ -32,6 +33,7 @@ Order::Order(std::string name_in, int screening_id_in, int tickets_in, int id_in
 	id = id_in;
 	// there's no exception here because unless the saved data is wrong (and it shouldn't be unless the user is stupid)
 	// then ID won't be occupied.
+	orders.push_back(*this);
 }
 
 int Order::getId() const

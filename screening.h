@@ -8,7 +8,7 @@
  * This is one screening of a movie. It has a location, ticket amounts and name of movie.
  * Two screenings may not be in the same location.
  * You can modify the amount of sold tickets by using the sellTickets function - this is foolproofed with exceptions.
- * All screenings are stored in the externed screenings vector.
+ * All screenings are stored (automatically) in the externed screenings vector.
  */
 
 class Screening {

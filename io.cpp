@@ -24,7 +24,7 @@ void loadScreenings()
 	while (!input.eof()) // loop until we're at the end of the file
 	{
 		input >> tmpLoc >> tmpName >> tmpTot >> tmpSold; // read info
-		screenings.push_back(Screening(tmpLoc, tmpName, tmpTot, tmpSold)); // add a new Screening object to the screenings vector
+		Screening(tmpLoc, tmpName, tmpTot, tmpSold); // create a new Screening object
 	}
 
 	// close the file
@@ -44,13 +44,13 @@ void loadOrders()
 		return;
 	input.seekg(0, std::ios::beg);
 
-	while (true)
+	while (!input.eof())
 	{
 		input >> tmpId >> tmpName >> tmpScrId >> tmpAmount;
-		orders.push_back(Order(tmpName, tmpScrId, tmpAmount, tmpId));
-		if (input.eof())
-			break;
+		Order(tmpName, tmpScrId, tmpAmount, tmpId);
 	}
+
+	input.close();
 }
 
 void saveScreenings()

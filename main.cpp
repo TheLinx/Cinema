@@ -93,7 +93,7 @@ int main()
 			cout << "== Location capacity?" << endl << "> ";
 			cin >> amount;
 			try {
-				screenings.push_back(Screening(loc, name, amount, 0));
+				Screening(loc, name, amount, 0);
 			}
 			catch (exception &e) {
 				cout << "Error: " << e.what() <<
@@ -130,7 +130,7 @@ int main()
 				int target_id;
 				Screening *target = getScreening(loc, &target_id);
 				cout << "== Booking " << amount << " tickets for screening of " << target->movieName() << " for " << name << "." << endl;
-				orders.push_back(Order(name, target_id, amount));
+				Order(name, target_id, amount);
 			}
 			catch (exception &e) {
 				cout << "Error: " << e.what() <<

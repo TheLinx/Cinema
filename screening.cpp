@@ -20,6 +20,7 @@ Screening::Screening(int loc, std::string name, int total, int sold)
 	_movieName = name;
 	_ticketsTotal = total;
 	_ticketsSold = sold;
+	screenings.push_back(*this); // add ourselves to the list of screenings
 }
 
 void Screening::sellTickets(int amount)
