@@ -27,6 +27,7 @@ public:
 	Order(std::string name, int screening_id, int tickets, int id);
 	// accessor function
 	int getId() const;
+	Screening *getScreening() const;
 	// action functions
 	void returnTickets();
 	void print(std::ostream &os) const;

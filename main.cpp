@@ -109,6 +109,7 @@ int main()
 				int target_id;
 				Screening *target = getScreening(loc, &target_id);
 				cout << "== Removing screening of " << target->movieName() << "." << endl;
+				target->purgeOrders();
 				screenings.erase(screenings.begin() + target_id);
 			}
 			catch (exception &e) {

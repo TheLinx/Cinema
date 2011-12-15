@@ -39,6 +39,11 @@ int Order::getId() const
 	return id;
 }
 
+Screening *Order::getScreening() const
+{
+	return screening;
+}
+
 void Order::returnTickets()
 {
 	screening->sellTickets(-tickets); // nothing weird here

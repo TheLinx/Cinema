@@ -1,5 +1,6 @@
 #include <iomanip>
 #include "screening.h"
+#include "order.h"
 #include "exceptions.h"
 
 std::vector<Screening> screenings;
@@ -10,9 +11,11 @@ Screening::Screening(int loc, std::string name, int total, int sold)
 	try {
 		getScreening(loc); // get a screening in this location
 	}
-	else { // we didn't suffer from an exception. this is actually bad.
-		throw err_KeyOccupied;
+	catch (std::exception &e) { // we had an error. this is actually good.
+		goto skipthrow; // yeah, goto is ugly. however, I don't know another way to do this.
 	}
+	throw err_KeyOccupied; // this will be skipped by the goto if we had an error
+	skipthrow: 
 	_location = loc;
 	_movieName = name;
 	_ticketsTotal = total;
@@ -91,6 +94,19 @@ std::ostream& operator<<(std::ostream &os, const Screening &s)
 { // cout << thing handler
 	s.print(os);
 	return os;
+}
+
+// remove Orders that link to this Screening
+// we need to do this before we remove a Screening
+void Screening::purgeOrders()
+{
+	for (unsigned i = 0; i < orders.size();) // we can't move to the next item if we've removed one, so we'll i++ manually
+	{
+		if (orders.at(i).getScreening() == this) // if the orders screening is this screening
+			orders.erase(orders.begin() + i); // remove the order from the vector
+		else // if not
+			i++; // move on to the next order
+	}
 }
 
 // print a pretty list of the screenings vector
