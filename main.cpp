@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <limits>
 #include "io.h"
 #include "screening.h"
 #include "order.h"
@@ -33,7 +34,8 @@ int main()
 		cout << " g) Remove an order" << endl;
 		cout << " q) Quit" << endl;
 		cout << "> ";
-		cin.getline(&cmd, 2);
+		cmd = cin.peek();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		switch(cmd)
 		{
 		/*
