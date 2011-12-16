@@ -26,8 +26,4 @@ class KeyOccupiedException: public std::exception { // err_KeyOccupied
 	}
 };
 
-extern OutOfBoundsException err_OutOfBounds;
-extern ValueNotFoundException err_NoSuchValue;
-extern KeyOccupiedException err_KeyOccupied;
-
 #endif

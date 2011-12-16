@@ -16,17 +16,17 @@
 class Order {
 private:
 	// our data
-	int id;
+	unsigned id;
 	std::string name;
 	Screening *screening;
-	int screening_id;
-	int tickets;
+	unsigned screening_id;
+	unsigned tickets;
 public:
 	// constructors
-	Order(std::string name, int screening_id, int tickets);
-	Order(std::string name, int screening_id, int tickets, int id);
+	Order(std::string name, unsigned screening_id, unsigned tickets);
+	Order(std::string name, unsigned screening_id, unsigned tickets, unsigned id);
 	// accessor function
-	int getId() const;
+	unsigned getId() const;
 	Screening *getScreening() const;
 	// action functions
 	void returnTickets();
@@ -40,7 +40,7 @@ extern std::vector<Order> orders;
 
 // non-class functions, but still related to orders
 void printAllOrders();
-Order *getOrder(int id);
-Order *getOrder(int id, int *vector_id);
+Order *getOrder(unsigned id);
+Order *getOrder(unsigned id, unsigned *vector_id);
 
 #endif

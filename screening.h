@@ -14,21 +14,21 @@
 class Screening {
 private:
 	// our data
-	int _location;
-	int _ticketsTotal;
-	int _ticketsSold;
-	std::string _movieName;
+	unsigned loc;     // Location
+	unsigned tickt;   // Total tickets
+	unsigned ticks;   // Sold tickets
+	std::string movn; // Movie name
 public:
 	// constructor
-	Screening(int loc, std::string name, int total, int sold);
+	Screening(unsigned location, std::string movieName, unsigned ticketsTotal, unsigned ticketsSold);
 	// accessor functions
-	int getLocation() const;
-	int ticketsTotal() const;
-	int ticketsSold() const;
-	int ticketsAvailable() const;
+	unsigned location() const;
+	unsigned ticketsTotal() const;
+	unsigned ticketsSold() const;
+	unsigned ticketsAvailable() const;
 	std::string movieName() const;
 	// modifier functions
-	void sellTickets(int amount); // can be negative (returns)
+	void sellTickets(int amount); // can be negative (for returns/refunds)
 	// action functions
 	void print(std::ostream &os) const;
 	void print(std::ostream &os, bool pad) const;
@@ -41,7 +41,7 @@ extern std::vector<Screening> screenings;
 
 // non-class functions, but still related to screenings
 void printAllScreenings();
-Screening *getScreening(int location);
-Screening *getScreening(int location, int *id);
+Screening *getScreening(unsigned location);
+Screening *getScreening(unsigned location, unsigned *id);
 
 #endif

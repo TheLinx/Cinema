@@ -5,7 +5,7 @@
 
 std::vector<Order> orders;
 
-Order::Order(std::string name_in, int screening_id_in, int tickets_in)
+Order::Order(std::string name_in, unsigned screening_id_in, unsigned tickets_in)
 {
 	name = name_in;
 	while (true)
@@ -24,7 +24,7 @@ Order::Order(std::string name_in, int screening_id_in, int tickets_in)
 	screening->sellTickets(tickets); // reserve the tickets
 	orders.push_back(*this);
 }
-Order::Order(std::string name_in, int screening_id_in, int tickets_in, int id_in) // if we already have an id (loading)
+Order::Order(std::string name_in, unsigned screening_id_in, unsigned tickets_in, unsigned id_in) // if we already have an id (loading)
 {
 	name = name_in;
 	screening_id = screening_id_in;
@@ -36,7 +36,7 @@ Order::Order(std::string name_in, int screening_id_in, int tickets_in, int id_in
 	orders.push_back(*this);
 }
 
-int Order::getId() const
+unsigned Order::getId() const
 {
 	return id;
 }
@@ -48,13 +48,13 @@ Screening *Order::getScreening() const
 
 void Order::returnTickets()
 {
-	screening->sellTickets(-tickets); // nothing weird here
+	screening->sellTickets(-(int)tickets); // nothing weird here
 }
 
 // the rest is pretty much identical to screening.cpp, look in that for comments.
 void Order::print(std::ostream &os) const
 {
-	os << id << "\t" << name << "\t" << screening_id << "\t" << tickets;
+	os << id << "\t" << name << "\t" << screening_id << "\t" << tickets << "\t";
 }
 void Order::print(std::ostream &os, bool padding) const
 {
@@ -82,23 +82,23 @@ void printAllOrders()
 	<< std::endl;
 	for (unsigned i = 0; i < orders.size(); i++)
 	{
-		orders.at(i).print(std::cout, true);
+		orders[i].print(std::cout, true);
 		std::cout << std::endl;
 	}
 }
 
-Order *getOrder(int id)
+Order *getOrder(unsigned id)
 {
-	int asd;
+	unsigned asd;
 	return getOrder(id, &asd);
 }
 
-Order *getOrder(int id, int *vector_id)
+Order *getOrder(unsigned id, unsigned *vector_id)
 {
 	int found = -1;
 	for (unsigned i = 0; i < orders.size(); i++)
 	{
-		if (orders.at(i).getId() == id)
+		if (orders[i].getId() == id)
 		{
 			found = i;
 			break;
@@ -106,8 +106,8 @@ Order *getOrder(int id, int *vector_id)
 	}
 	if (found == -1)
 	{
-		throw err_NoSuchValue;
+		throw ValueNotFoundException();
 	}
 	*vector_id = found;
-	return &orders.at(found);
+	return &orders[found];
 }

@@ -9,8 +9,7 @@
 void loadScreenings()
 {
 	// define the variables we need when reading from the input file
-	int tmpLoc, tmpTot, tmpSold;
-	std::string tmpName;
+	std::string tmpData[4];
 	// open the file
 	std::ifstream input("biljett.txt");
 
@@ -23,8 +22,12 @@ void loadScreenings()
 	
 	while (!input.eof()) // loop until we're at the end of the file
 	{
-		input >> tmpLoc >> tmpName >> tmpTot >> tmpSold; // read info
-		Screening(tmpLoc, tmpName, tmpTot, tmpSold); // create a new Screening object
+		// read info
+		getline(input, tmpData[0], '\t'); // location
+		getline(input, tmpData[1], '\t'); // movie name
+		getline(input, tmpData[2], '\t'); // total tickets
+		getline(input, tmpData[3], '\n'); // sold tickets
+		Screening(stoi(tmpData[0]), tmpData[1], stoi(tmpData[2]), stoi(tmpData[3])); // create a new Screening object
 	}
 
 	// close the file
@@ -33,8 +36,7 @@ void loadScreenings()
 
 void loadOrders()
 {
-	int tmpId, tmpScrId, tmpAmount;
-	std::string tmpName;
+	std::string tmpData[4];
 	std::ifstream input("order.txt");
 
 	if(!input)
@@ -46,8 +48,11 @@ void loadOrders()
 
 	while (!input.eof())
 	{
-		input >> tmpId >> tmpName >> tmpScrId >> tmpAmount;
-		Order(tmpName, tmpScrId, tmpAmount, tmpId);
+		getline(input, tmpData[0], '\t'); // ID
+		getline(input, tmpData[1], '\t'); // customer name
+		getline(input, tmpData[2], '\t'); // screening id
+		getline(input, tmpData[3], '\n'); // amount of tickets
+		Order(tmpData[1], stoi(tmpData[2]), stoi(tmpData[3]), stoi(tmpData[0]));
 	}
 
 	input.close();
@@ -64,7 +69,7 @@ void saveScreenings()
 		{ // if we've already printed something
 			output << std::endl; // print a new-line first
 		}
-		output << screenings.at(i); // now, print the screening, using the cout << thing
+		output << screenings[i]; // now, print the screening, using the cout << thing
 	}
 
 	// and close the file
@@ -81,7 +86,7 @@ void saveOrders()
 		{
 			output << std::endl;
 		}
-		output << orders.at(i);
+		output << orders[i];
 	}
 
 	output.close();
