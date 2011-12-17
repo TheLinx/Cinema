@@ -41,7 +41,6 @@ extern std::vector<Screening> screenings;
 
 // non-class functions, but still related to screenings
 void printAllScreenings();
-Screening *getScreening(unsigned location);
-Screening *getScreening(unsigned location, unsigned *id);
+Screening *getScreening(unsigned location, unsigned *id = NULL);
 
 #endif

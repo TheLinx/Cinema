@@ -87,12 +87,6 @@ void printAllOrders()
 	}
 }
 
-Order *getOrder(unsigned id)
-{
-	unsigned asd;
-	return getOrder(id, &asd);
-}
-
 Order *getOrder(unsigned id, unsigned *vector_id)
 {
 	int found = -1;
@@ -108,6 +102,6 @@ Order *getOrder(unsigned id, unsigned *vector_id)
 	{
 		throw ValueNotFoundException();
 	}
-	*vector_id = found;
+	if (vector_id) *vector_id = found;
 	return &orders[found];
 }

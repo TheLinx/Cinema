@@ -40,7 +40,6 @@ extern std::vector<Order> orders;
 
 // non-class functions, but still related to orders
 void printAllOrders();
-Order *getOrder(unsigned id);
-Order *getOrder(unsigned id, unsigned *vector_id);
+Order *getOrder(unsigned id, unsigned *vector_id = NULL);
 
 #endif

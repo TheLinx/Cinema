@@ -143,13 +143,6 @@ Screening *getScreening(unsigned location, unsigned *id)
 	{
 		throw ValueNotFoundException(); // it's exception o'clock
 	}
-	*id = found; // pass id of screening upstream
+	if (id) *id = found; // pass id of screening upstream
 	return &screenings[found]; // and return a reference
-}
-
-// if we don't actually need the vector id
-Screening *getScreening(unsigned location)
-{
-	unsigned asd; // there's probably a way to do this without even creating a temp variable, but this is probably
-	return getScreening(location, &asd); // optimized out by the compiler anyway
 }
